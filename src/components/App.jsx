@@ -34,6 +34,20 @@ import Modal from "./modal/Modal";
     });
   };
 
+  async componentDidUpdate(_, prevState) {
+    const prevRequest = prevState.query;
+    const nextRequest = this.state.query;
+   
+
+    if (prevRequest !== nextRequest) {
+      // console.log(this.state, 'update')
+      // this.state.images = [];
+      // this.state.page = 1;
+      this.getData();
+    }
+  
+  }
+
   getData = async () => {
     console.log(this.state, 'get');
     try {
@@ -43,34 +57,20 @@ import Modal from "./modal/Modal";
       }
       this.setState({ isLoading: true });
       const images = await getImages(this.state.page, this.state.query);
-      this.setState(prevState => ({
-        images: [...prevState.images, ...images.images],
-        isLoading: false,
-        hits: images.total,
-        totalHits: images.totalHits,
-      }));
+      console.log(images)
+      // this.setState(prevState => ({
+      //   images: [...prevState.images, ...images.images],
+      //   isLoading: false,
+      //   hits: images.total,
+      //   totalHits: images.totalHits,
+      // }));
     } catch (error) {
       this.setState({ error: true, isLoading: false });
       console.log(error);
     }
   };
 
-  async componentDidUpdate(_, prevState) {
-    const prevRequest = prevState.query;
-    const nextRequest = this.state.query;
-    const prevPage = prevState.page;
-    const nextPage = this.state.page;
-
-    if (prevRequest !== nextRequest) {
-      // console.log(this.state, 'update')
-      this.state.images = [];
-      this.state.page = 1;
-      this.getData();
-    }
-    if (prevPage !== nextPage) {
-      this.getData();
-    }
-  }
+  
 
   loadMore = async () => {
     this.setState(prevState => ({
