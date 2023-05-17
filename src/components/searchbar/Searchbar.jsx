@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Formik, Field, Form } from "formik";
 
 const initialValues = {
@@ -36,6 +36,6 @@ const initialValues = {
   )
 }
 
-Searchbar.propTypes = {
-onSubmit: PropTypes.func.isRequired,
-}
+// Searchbar.propTypes = {
+// onSubmit: PropTypes.func.isRequired,
+// }

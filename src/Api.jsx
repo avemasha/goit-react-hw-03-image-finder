@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const axios = require('axios').default;
 const API_KEY = '34463648-52ae7b431b36c8e3f85583ecc';
@@ -20,7 +20,7 @@ export const getImages = async (page, query) => {
   } catch (error) {}
 };
 
-getImages.propTypes = {
-  page: PropTypes.number.isRequired,
-  query: PropTypes.string.isRequired,
-};
+// getImages.propTypes = {
+//   page: PropTypes.number.isRequired,
+//   query: PropTypes.string.isRequired,
+// };
