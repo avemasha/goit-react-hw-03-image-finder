@@ -64,6 +64,7 @@ import Modal from "./modal/Modal";
       //   hits: images.total,
       //   totalHits: images.totalHits,
       // }));
+
     } catch (error) {
       this.setState({ error: true, isLoading: false });
       console.log(error);
