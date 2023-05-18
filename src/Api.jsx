@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types';
 
-const axios = require('axios').default;
+// const axios = require('axios').default;
+import axios from 'axios'
 const API_KEY = '34463648-52ae7b431b36c8e3f85583ecc';
 const BASIC_URL = `https://pixabay.com/api/?key=${API_KEY}&q=`;
 const searchParams = '&image_type=photo&orientation=horizontal';

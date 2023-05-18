@@ -58,12 +58,12 @@ import Modal from "./modal/Modal";
       this.setState({ isLoading: true });
       const images = await getImages(this.state.page, this.state.query);
       console.log(images)
-      // this.setState(prevState => ({
-      //   images: [...prevState.images, ...images.images],
-      //   isLoading: false,
-      //   hits: images.total,
-      //   totalHits: images.totalHits,
-      // }));
+      this.setState(prevState => ({
+        images: [...prevState.images, ...images.images],
+        isLoading: false,
+        hits: images.total,
+        totalHits: images.totalHits,
+      }));
 
     } catch (error) {
       this.setState({ error: true, isLoading: false });
