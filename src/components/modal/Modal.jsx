@@ -31,9 +31,9 @@ export default class Modal extends Component {
   render() {
     const { src, alt } = this.props;
     return createPortal(
-      <div onClick={this.clickBackdrop}>
+      <div onClick={this.clickBackdrop} className='overlay'>
         <div>
-          <img src={src} alt={alt} />
+          <img src={src} alt={alt} className='modal' />
         </div>
       </div>,
       document.querySelector('#modal-root')

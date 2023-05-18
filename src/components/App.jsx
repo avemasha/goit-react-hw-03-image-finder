@@ -34,15 +34,19 @@ import Modal from "./modal/Modal";
     });
   };
 
-  async componentDidUpdate(_, prevState) {
+   componentDidUpdate(_, prevState) {
     const prevRequest = prevState.query;
     const nextRequest = this.state.query;
-   
+    const prevPage = prevState.page;
+    const nextPage = this.state.page;
 
     if (prevRequest !== nextRequest) {
-      // console.log(this.state, 'update')
-      // this.state.images = [];
-      // this.state.page = 1;
+      
+      this.setState.images = [];
+      this.setState.page = 1;
+      this.getData();
+    }
+    if (prevPage !== nextPage) {
       this.getData();
     }
   
@@ -108,34 +112,41 @@ import Modal from "./modal/Modal";
     const { bigImg, alt } = modalData;
 
     return (
-    <div>
-   <Searchbar updateQuery={this.updateQuery} />
-   {images.length === 0 && !isLoading && (
-          <p>
-            There`re no images yet. Please enter the search category!
-          </p>
-        )}
-        {images.length !== 0 && (
-          <>
-            <ImageGallery data={images} onClick={this.toggleModal} />{' '}
-          </>
-        )}
-  {hits >= 12 && images.length !== totalHits && !isLoading && (
-    <LoadMore click={this.loadMore} />
-  )}
-    {isLoading && (
-          <ColorRing
-            visible={true}
-            height="180"
-            width="180"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-          />
-        )}
-         {showModal && <Modal src={bigImg} alt={alt} close={this.resetModal} />}
-  </div>
+      <div
+      style={{
+        width: '1240px',
+        padding: '0 20px',
+        margin: '0 auto',
+      }}
+    >
+      <Searchbar updateQuery={this.updateQuery} />
+      {images.length === 0 && !isLoading && (
+        <p>
+          There`re no images yet. Please enter the search category!
+        </p>
+      )}
+      {images.length !== 0 && (
+        <>
+          <ImageGallery data={images} onClick={this.toggleModal} />{' '}
+        </>
+      )}
+      {hits >= 12 && images.length !== totalHits && !isLoading && (
+        <LoadMore click={this.loadMore} />
+      )}
+
+      {isLoading && (
+        <ColorRing
+          visible={true}
+          height="180"
+          width="180"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />
+      )}
+      {showModal && <Modal src={bigImg} alt={alt} close={this.resetModal} />}
+    </div>
     )};
 };
 
