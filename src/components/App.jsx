@@ -143,6 +143,7 @@ import Modal from "./modal/Modal";
           wrapperStyle={{}}
           wrapperClass="blocks-wrapper"
           colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+          marginLeft='100px'
         />
       )}
       {showModal && <Modal src={bigImg} alt={alt} close={this.resetModal} />}
