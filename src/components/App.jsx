@@ -34,34 +34,49 @@ import Modal from "./modal/Modal";
     });
   };
 
-   componentDidUpdate(_, prevState) {
+  //  componentDidUpdate(_, prevState) {
+  //   const prevRequest = prevState.query;
+  //   const nextRequest = this.state.query;
+  //   const prevPage = prevState.page;
+  //   const nextPage = this.state.page;
+  //  const newImages = this.state.images.map()
+
+
+  //   if (prevRequest !== nextRequest) {
+      
+  //     this.setState.images = [];
+  //     this.setState.page = 1;
+  //     this.getData();
+  //   }
+  //   if (prevPage !== nextPage) {
+  //     this.getData();
+  //   }
+  
+  // }
+
+  componentDidUpdate(_, prevState) {
     const prevRequest = prevState.query;
     const nextRequest = this.state.query;
     const prevPage = prevState.page;
     const nextPage = this.state.page;
-
-    if (prevRequest !== nextRequest) {
-      
-      this.setState.images = [];
-      this.setState.page = 1;
-      this.getData();
-    }
-    if (prevPage !== nextPage) {
-      this.getData();
-    }
   
+    if (prevRequest !== nextRequest || prevPage !== nextPage) {
+      this.setState({
+        images: [],
+        page: 1
+      }, () => {
+        this.getData();
+      });
+    }
   }
 
   getData = async () => {
-    console.log(this.state, 'get');
+    
     try {
-      if (!this.state.query) {
-        console.log(this.state.query);
-        return;
-      }
+   
       this.setState({ isLoading: true });
       const images = await getImages(this.state.page, this.state.query);
-      console.log(images)
+     
       this.setState(prevState => ({
         images: [...prevState.images, ...images.images],
         isLoading: false,
@@ -71,7 +86,7 @@ import Modal from "./modal/Modal";
 
     } catch (error) {
       this.setState({ error: true, isLoading: false });
-      console.log(error);
+     
     }
   };
 
@@ -85,9 +100,7 @@ import Modal from "./modal/Modal";
 
   toggleModal = evt => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
-    if (evt.target.nodeName !== 'IMG') {
-      return;
-    }
+    
     this.setState({
       modalData: {
         bigImg: evt.target.dataset.src,
@@ -143,7 +156,7 @@ import Modal from "./modal/Modal";
           wrapperStyle={{}}
           wrapperClass="blocks-wrapper"
           colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-          marginLeft='100px'
+          
         />
       )}
       {showModal && <Modal src={bigImg} alt={alt} close={this.resetModal} />}
