@@ -7,20 +7,16 @@ const searchParams = '&image_type=photo&orientation=horizontal';
 
 export const getImages = async (page, query) => {
   const serverDataURL = `${BASIC_URL}${query}${searchParams}&page=${page}&per_page=12`;
-  try{
-    const server = await axios.get(serverDataURL);
-    const data =  server.data;
-    console.log(data)
+ 
+    const {data} = await axios.get(serverDataURL);
     const length = data.hits.length;
-    console.log(length)
     const dataHits = {
       images: data.hits,
       total: length,
       totalHits: data.totalHits,
     };
-    console.log(dataHits)
     return dataHits;
-  } catch (error) {}
+   
 };
 
 getImages.propTypes = {

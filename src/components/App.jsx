@@ -34,25 +34,7 @@ import Modal from "./modal/Modal";
     });
   };
 
-  //  componentDidUpdate(_, prevState) {
-  //   const prevRequest = prevState.query;
-  //   const nextRequest = this.state.query;
-  //   const prevPage = prevState.page;
-  //   const nextPage = this.state.page;
-  //  const newImages = this.state.images.map()
 
-
-  //   if (prevRequest !== nextRequest) {
-      
-  //     this.setState.images = [];
-  //     this.setState.page = 1;
-  //     this.getData();
-  //   }
-  //   if (prevPage !== nextPage) {
-  //     this.getData();
-  //   }
-  
-  // }
 
   componentDidUpdate(_, prevState) {
     const prevRequest = prevState.query;
@@ -61,12 +43,9 @@ import Modal from "./modal/Modal";
     const nextPage = this.state.page;
   
     if (prevRequest !== nextRequest || prevPage !== nextPage) {
-      this.setState({
-        images: [],
-        page: 1
-      }, () => {
+      
         this.getData();
-      });
+      
     }
   }
 
@@ -79,20 +58,24 @@ import Modal from "./modal/Modal";
      
       this.setState(prevState => ({
         images: [...prevState.images, ...images.images],
-        isLoading: false,
+       
         hits: images.total,
         totalHits: images.totalHits,
       }));
 
     } catch (error) {
-      this.setState({ error: true, isLoading: false });
+      this.setState({ error: error.message });
      
+    } finally  {
+      this.setState({  isLoading: false });
     }
+      
+    
   };
 
   
 
-  loadMore = async () => {
+  loadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
